@@ -1,0 +1,79 @@
+basePath: /api/v1
+definitions:
+  handlers.errorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  handlers.userResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.User'
+        type: array
+    type: object
+  model.User:
+    properties:
+      email:
+        type: string
+      fullname:
+        type: string
+      isactive:
+        type: boolean
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: sample@gmail.com
+    name: Just Goo
+    url: https://github.com/Just-Goo
+  description: Sample description
+  title: Documenting API (YouTube)
+  version: "1"
+paths:
+  /users:
+    get:
+      description: return list of all users from the database
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.userResponse'
+      summary: return list of all users
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      description: create new user
+      parameters:
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.errorResponse'
+      security:
+      - bearerToken: []
+      summary: create new user
+      tags:
+      - Users
+securityDefinitions:
+  bearerToken:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
