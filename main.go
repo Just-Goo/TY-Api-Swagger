@@ -10,9 +10,9 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @title Documenting API (YouTube)
+// @title API Documentation
 // @version 1
-// @Description Sample description
+// @Description Test description
 
 // @contact.name Just Goo
 // @contact.url https://github.com/Just-Goo
